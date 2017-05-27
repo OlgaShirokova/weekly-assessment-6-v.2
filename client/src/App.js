@@ -4,6 +4,99 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 
+
+class EventList extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+    this.getEvents();
+  }
+
+  getEvents () {
+    fetch('http://localhost:3001/events', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((resp) => resp.json())
+    .then(data => {
+      this.setState({data});
+    });
+  }
+
+  renderEvents () {
+    console.log(this.state);
+    return this.state.data.map(element => {
+      return (
+        <div>
+          <h2>{element.title}</h2>
+          <p>{element.date}</p>
+          <p>{element.venue}</p>
+        </div>
+      )
+    });
+  }
+
+  render () {
+    return (
+      <div className="event-list-container">
+        {this.renderEvents()}
+      </div>
+    );
+  }
+
+}
+
+
+class NextEvent extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+    this.getEvents();
+  }
+
+  getEvents () {
+    fetch('http://localhost:3001/events', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    .then((resp) => resp.json())
+    .then(data => {
+      this.setState({data});
+    });
+  }
+
+  renderEvents () {
+    if (this.state.data.length>0) {
+      console.log(this.state.data[0].title);
+        return (
+          <div>
+            <h2>{this.state.data[0].title}</h2>
+            <p>{this.state.data[0].date}</p>
+            <p>{this.state.data[0].venue}</p>
+          </div>
+        )
+    }
+  }
+
+  render () {
+    return (
+      <div className="event-list-container">
+        {this.renderEvents()}
+      </div>
+    );
+  }
+
+}
+
+
 class App extends Component {
   state = {};
 
@@ -25,16 +118,16 @@ class App extends Component {
     });
   }
 
-
-
   render() {
     return (
       <div className="container">
         <div className="left-panel">
           <div className='next-event'>
             <h1>NEXT EVENT</h1>
+            <NextEvent />
           </div>
           <div className='upcoming-events'>
+            <EventList />
           </div>
         </div>
         <div className="right-panel">

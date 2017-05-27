@@ -1,16 +1,19 @@
-import { addMovies } from './actions';
-import { markAsSeen } from './actions';
-// import { fetchMovies } from './moviesAPI';
+import { combineReducers } from 'redux';
+import { addEvent } from './actions';
 
-const movies = (state = [], action) => {
-  switch (action.type) {
-  case 'ADD_MOVIES':
-    return state.concat(action.movies);
-  case 'MARK_AS_SEEN':
-    return state.concat(!action.movies);
-  default:
-    return state;
+let nextId=0;
+
+const events = (state = [], action) => {
+  if (action.type === 'ADD_EVENT') {
+    nextId += 1;
+    return [...state, {id: nextId, title: action.title, date: action.date, venue: action.venue}]
+    //action.event?
+    // return {
+    //
+    // };
   }
+  console.log(state);
+  return state;
 };
 
-export default movies;
+export default events;

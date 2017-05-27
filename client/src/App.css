@@ -5,8 +5,7 @@
 
 .left-panel {
   display: flex;
-  background-color: green;
-  border: 5px solid black;
+  flex-direction: column;
   flex: 0.6;
   padding: 30px;
 }
@@ -14,8 +13,6 @@
 .right-panel {
   display: flex;
   flex-direction: column;
-  background-color: red;
-  border: 5px solid black;
   padding: 30px;
   width: 500px;
   height: 500px;
@@ -23,6 +20,7 @@
 }
 
 .next-event {
+  padding: 10px;
   border: 5px solid black;
   width: 80%;
   height: 80%;
@@ -51,4 +49,10 @@
   height: 40px;
   font-size: 100%;
   font-weight: bold;
+}
+
+.upcoming-events {
+  margin: 30px;
+  width: 80%;
+
 }
